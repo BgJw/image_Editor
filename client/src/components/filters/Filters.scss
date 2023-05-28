@@ -1,5 +1,4 @@
-
-.filters{
+.filters {
     grid-area: b;
 
     display: grid;
@@ -7,100 +6,113 @@
     border: 2px solid rgb(215, 212, 212);
     border-radius: 2%;
     padding: 10px;
-    min-width: 200px;
+    width: 300px;
+    height: 400px;
 
-    
-    &__colors{
+    &__colors {
         display: grid;
         -webkit-box-pack: center;
-            -ms-flex-pack: center;
-                justify-content: center;
-        grid-template-areas: 
-        "h h"
-        "b b"
-        "b b"
-        "i i";
-        
+        -ms-flex-pack: center;
+        justify-content: center;
+        grid-template-areas:
+            "h h"
+            "b b"
+            "b b"
+            "i i";
+
         grid-template-columns: repeat(2, 45%);
         grid-gap: 10px;
-        
-            h2{
-                grid-area: h;
-                height: 5px;
-            }
-            &-input{
-                grid-area: i;
-                display: grid;
-                -webkit-box-align: center;
-                    -ms-flex-align: center;
-                        align-items: center;
-                .information{
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    justify-items: center;
-                    span{
-                        font-size: 18px;
-                    }
-                }
-            }
-    }
-    &__rotateFlips{
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows:  50px 1fr;
-        text-align: center;
-        
-        .wrap{
-            display: grid;
-            -webkit-box-pack: space-evenly;
-                -ms-flex-pack: space-evenly;
-                    justify-content: space-evenly;
-            grid-template-columns: repeat(4, 15%);
-            grid-template-rows: 40%;
-                    -webkit-column-gap: 5px;
-                       -moz-column-gap: 5px;
-                            column-gap: 5px;
+
+        h2 {
+            grid-area: h;
+            height: 5px;
         }
 
-        
+        &-input {
+            grid-area: i;
+            display: grid;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+
+            input {
+                cursor: pointer;
+            }
+
+            .information {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                justify-items: center;
+
+                span {
+                    font-size: 18px;
+                }
+            }
+        }
     }
-    button{
-        &.controlBttn{
+
+    &__rotateFlips {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 50px 1fr;
+        text-align: center;
+
+        .wrap {
+            display: grid;
+            -webkit-box-pack: space-evenly;
+            -ms-flex-pack: space-evenly;
+            justify-content: space-evenly;
+            grid-template-columns: repeat(4, 15%);
+            grid-template-rows: 50%;
+        }
+
+
+    }
+
+    button {
+        &.controlBttn {
             background-color: white;
-            color:rgb(187, 187, 187);
+            color: rgb(187, 187, 187);
             border: 1px solid rgba(177, 175, 175, 0.611);
             font-size: 16px;
-            
-            &:hover, &.activeControlBttn{
+
+            &:hover,
+            &.active {
                 background-color: rgb(23, 127, 196);
                 color: white;
             }
         }
-        &.transformBttn{
+
+        &.transformBttn {
             background-color: white;
             border: 1px solid rgba(177, 175, 175, 0.611);
             background-position: center center;
             background-size: contain;
+            background-repeat: no-repeat;
 
-            &:hover{
+            &:hover {
                 background-color: rgba(235, 234, 234, 0.611);
                 border: none;
-            } 
-            &:active{
+            }
+
+            &:active {
                 background-color: rgb(23, 127, 196);
                 color: white;
             }
 
-            &.left{
+            &.left {
                 background-image: url('../../assets/rotate_left.png');
             }
-            &.right{
+
+            &.right {
                 background-image: url('../../assets/rotate_right.png');
             }
-            &.vertical{
+
+            &.vertical {
                 background-image: url('../../assets/vertical.png');
             }
-            &.horizontal{
+
+            &.horizontal {
                 background-image: url('../../assets/horizontal.png');
             }
         }

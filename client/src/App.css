@@ -21,7 +21,8 @@ button{
 
 
 .App{
-    width: 70%;
+    width: 80%;
+    min-height: 600px;
     margin: 20px auto;
 
     display: grid;
@@ -30,9 +31,11 @@ button{
         "b b c c"
         "b b c c"
         "d d d d";
-    row-gap: 20px;    
-
-    
+        justify-items: stretch;
+    row-gap: 20px;
+    -webkit-column-gap: 20px;
+       -moz-column-gap: 20px;
+            column-gap: 20px;    
     .header{
         grid-area: a;
     }

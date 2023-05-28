@@ -1,50 +1,62 @@
-.controls{
+.controls {
     grid-area: d;
     display: grid;
     grid-template-columns: 20% 50%;
     -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
 
-    button{
+    button, label {
         min-width: 80px;
         height: 50px;
         text-transform: uppercase;
-        
-    }        
-    .reset{
+
+    }
+
+    .reset {
         background-color: white;
         border: 2px solid rgba(177, 175, 175, 0.611);
-        color:rgb(177, 175, 175);
-        &:hover{
+        color: rgb(177, 175, 175);
+
+        &:hover {
             background-color: rgb(114, 114, 114);
-            color:rgb(255, 255, 255);
+            color: rgb(255, 255, 255);
             border: none;
         }
     }
 
-    &__wrap{
+    &__wrap {
         display: grid;
         grid-template-columns: repeat(2, 50%);
         -webkit-column-gap: 10px;
-           -moz-column-gap: 10px;
-                column-gap: 10px;
+        -moz-column-gap: 10px;
+        column-gap: 10px;
         -webkit-box-pack: end;
-            -ms-flex-pack: end;
-                justify-content: end;
+        -ms-flex-pack: end;
+        justify-content: end;
 
-        .choose{
-                background-color: rgb(114, 114, 114);
-                color:rgb(255, 255, 255);
+        .choose {
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            background-color: rgb(114, 114, 114);
+            color: rgb(255, 255, 255);
+            border-radius: 5%;
 
-                &:hover{
-                    background-color: rgba(114, 114, 114, 0.852);
-                }
+            &:hover {
+                background-color: rgba(114, 114, 114, 0.852);
+            }
+
+            input {
+                display: none;
+            }
         }
-        .save{
+
+        .save {
             background-color: rgb(23, 127, 196);
             color: white;
-            &:hover{
+
+            &:hover {
                 background-color: rgba(23, 127, 196, 0.724);
             }
         }
