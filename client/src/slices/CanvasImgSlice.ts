@@ -1,26 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { filterName, ICanvasImgSlice, Ifilter } from "../types/Types";
 
 
-
-export interface ICanvasImgSlice {
-    image: string,
-    brightness: number,
-    saturate: number,
-    invert: number,
-    grayscale: number,
-    rotate: number,
-    rotateY: number,
-    rotateX: number, 
-}
-export interface Ifilter {
-    brightness: number,
-    saturate: number,
-    invert: number,
-    grayscale: number,
-    rotate: number,
-    rotateY: number,
-    rotateX: number, 
-}
 
 const initialState: ICanvasImgSlice = {
     image: '',
@@ -31,9 +12,9 @@ const initialState: ICanvasImgSlice = {
     rotate: 0,
     rotateY: 0,
     rotateX: 0,
-  }
-  
-  const CanvasImgSlice = createSlice({
+}
+
+const CanvasImgSlice = createSlice({
     name: 'CanvasImgSlice',
     initialState,
     reducers: {
@@ -43,7 +24,7 @@ const initialState: ICanvasImgSlice = {
         removeImg: (state) => {
             state.image = '';
         },
-        setValue: (state, {payload}: PayloadAction<{name: string, value: number}>) => {
+        setValue: (state, { payload }: PayloadAction<{ name: filterName, value: number }>) => {
             if (payload.name === 'brightness') {
                 state.brightness = payload.value;
             }
@@ -66,28 +47,37 @@ const initialState: ICanvasImgSlice = {
             state.rotateX = 0;
             state.rotateY = 0;
         },
-        returnFilters: (state, {payload}: PayloadAction<Ifilter>) => {
-            return {...state, ...payload};            
+        returnFilters: (state, { payload }: PayloadAction<Ifilter>) => {
+            return { ...state, ...payload };
         },
-        rotate: (state, {payload}: PayloadAction<{way: string, value: number}> ) => {
+        rotate: (state, { payload }: PayloadAction<{ way: string, value: number }>) => {
             if (payload.way === 'left') {
                 state.rotate += payload.value;
             } else if (payload.way === 'right') {
                 state.rotate -= payload.value;
-            } else if (payload.way === 'vertical'){
-                state.rotateY += payload.value
-            } else if (payload.way === 'horizontal'){
-                state.rotateX += payload.value;
+            } else if (payload.way === 'vertical') {
+                if (state.rotateY === 0) {
+                    state.rotateY += payload.value;
+                } else {
+                    state.rotateY -= payload.value;
+                }
+            } else if (payload.way === 'horizontal') {
+                if(state.rotateX === 0 ){
+                    state.rotateX += payload.value;
+                } else {
+                    state.rotateX -= payload.value;
+                }
             }
         }
-        
 
     },
-    extraReducers: (builder) => {
-    },
-  });
+
+});
 
 
-  export const {addImg, removeImg, setValue, resetFilters, rotate,returnFilters } = CanvasImgSlice.actions;
+export const {
+    addImg, removeImg,
+    setValue, resetFilters,
+    rotate, returnFilters } = CanvasImgSlice.actions;
 
-  export default CanvasImgSlice.reducer;
+export default CanvasImgSlice.reducer;

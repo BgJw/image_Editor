@@ -8,7 +8,12 @@
     padding: 10px;
     width: 300px;
     height: 400px;
+    
+    &.disabled{
+        z-index: -10;
 
+        opacity: .7;
+    }
     &__colors {
         display: grid;
         -webkit-box-pack: center;

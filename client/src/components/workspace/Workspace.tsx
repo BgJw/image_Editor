@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { Ifilter, resetFilters, returnFilters } from "../../slices/CanvasImgSlice";
+import { resetFilters, returnFilters } from "../../slices/CanvasImgSlice";
+import { Ifilter } from "../../types/Types";
 import './Workspace.scss';
 
 const Workspace = () => {
@@ -8,7 +9,8 @@ const Workspace = () => {
                     = useAppSelector(state => state.CanvasImgSlice);
     const dispatch = useAppDispatch();
     const [history, setHistory] = useState<Ifilter>();
-
+    const [transition, setTransition] = useState(true);
+    
     const STYLE = {
         filter: `brightness(${brightness}%) 
                  invert(${invert /2}%)
@@ -38,13 +40,18 @@ const setFilter = () => {
             <img
                 style={ STYLE } 
                 src={image? image : 'https://www.uipi.com/wp-content/uploads/2018/07/placeholder.png'} 
-                alt=""  className='imageRefactoring'
+                alt=""  className={ `${transition ? 'allTransition ' : 'resetFilter '} imageRefactoring`}
                 
                 onMouseDown={ () => {
+                    setTransition(false);
                     setFilter();
                     dispatch(resetFilters());
                 }}
-                onMouseUp={() => dispatch(returnFilters(history as Ifilter)) }/>
+                onMouseUp={() => {
+                    dispatch(returnFilters(history as Ifilter)) 
+                    setTimeout(() => {
+                        setTransition(true)}, 400)
+                    }}/>
         </div>
     );
 };

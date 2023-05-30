@@ -11,6 +11,11 @@
         height: 50px;
         text-transform: uppercase;
 
+        &:disabled{
+            cursor: default;
+            opacity: .6;
+            
+        }
     }
 
     .reset {
@@ -18,7 +23,7 @@
         border: 2px solid rgba(177, 175, 175, 0.611);
         color: rgb(177, 175, 175);
 
-        &:hover {
+        &:not(:disabled):hover {
             background-color: rgb(114, 114, 114);
             color: rgb(255, 255, 255);
             border: none;
@@ -42,7 +47,7 @@
             background-color: rgb(114, 114, 114);
             color: rgb(255, 255, 255);
             border-radius: 5%;
-
+            
             &:hover {
                 background-color: rgba(114, 114, 114, 0.852);
             }
@@ -56,7 +61,7 @@
             background-color: rgb(23, 127, 196);
             color: white;
 
-            &:hover {
+            &:not(:disabled):hover {
                 background-color: rgba(23, 127, 196, 0.724);
             }
         }

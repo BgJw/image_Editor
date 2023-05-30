@@ -1,21 +1,30 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { ICanvasImgSlice, rotate, setValue } from '../../slices/CanvasImgSlice';
+import { rotate, setValue } from '../../slices/CanvasImgSlice';
+import { ICanvasImgSlice, filterName } from '../../types/Types';
+
 import './Filters.scss';
 
 const Filters = () => {
     const filter = useAppSelector( state => state.CanvasImgSlice);
-    
-    const [activeFilter, setActiveFilter] = useState('brightness');
+    const [activeFilter, setActiveFilter] = useState<filterName>();
     const activeValue = filter[activeFilter as keyof ICanvasImgSlice];   
     const dispatch = useAppDispatch();
-
+    
+    const isActiveBttn = () => {
+        if (filter.image.length > 0 && activeFilter === undefined) {
+            return {
+                animation: 'pulse 2s infinite'
+            }
+        }
+    }
 
     return (
-        <div className="filters">
+        <div className={filter.image.length > 0 ? "filters": 'filters disabled'}>
             <div className='filters__colors'>
                 <h2>Filters</h2>
-                <button 
+                <button
+                    style={ isActiveBttn()} 
                     className={activeFilter === 'brightness'? 'controlBttn active': 'controlBttn'}
                     onClick={ () => {
                         setActiveFilter('brightness');
@@ -48,10 +57,11 @@ const Filters = () => {
                         <span>{activeFilter}</span>
                         <span>{activeValue}</span>
                     </div>
-                    <input type="range" min={0} max={200} 
+                    <input type="range" min={0} max={200}
+                        disabled={activeFilter === undefined}
                         value={activeValue}
                         onChange={ e => 
-                        dispatch(setValue({name: activeFilter, value: +e.target.value}))} />
+                        dispatch(setValue({name: activeFilter as filterName, value: +e.target.value}))} />
                 </div>
             </div>
             <div className='filters__rotateFlips'>
@@ -59,11 +69,11 @@ const Filters = () => {
                 <div className='wrap'>
                     <button 
                         className='transformBttn left' 
-                        onClick={ () => dispatch(rotate({way: 'left',value: 90}))}
+                        onClick={ () => dispatch(rotate({way: 'right',value: 90}))}
                     />
                     <button 
                         className='transformBttn right' 
-                        onClick={ () => dispatch(rotate({way: 'right', value: 90}))}
+                        onClick={ () => dispatch(rotate({way: 'left', value: 90}))}
                         />
                     <button 
                         className='transformBttn vertical' 
