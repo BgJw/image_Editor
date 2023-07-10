@@ -1,7 +1,7 @@
 import Workspace from './components/workspace/Workspace';
 import Filters from './components/filters/Filters';
 import ControlButtons from './components/controlButtons/ControlButtons';
-import './App.css';
+import './App.scss';
 import { useAppDispatch, useAppSelector } from './hooks/hooks';
 import { useEffect } from 'react';
 import { addImg, saveImage } from './slices/CanvasImgSlice';
