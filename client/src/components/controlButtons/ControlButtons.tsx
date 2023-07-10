@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { addImg, resetFilters } from '../../slices/CanvasImgSlice';
+import { addImg, resetFilters, saveImage } from '../../slices/CanvasImgSlice';
 import './ControlButtons.scss';
 
 const ControlButtons = () => {
-    const { image, brightness, grayscale, invert, saturate, rotate, rotateX, rotateY } = useAppSelector(state => state.CanvasImgSlice);
+    const { image } = useAppSelector(state => state.CanvasImgSlice);
     const dispatch = useAppDispatch();
 
     const setFile = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,41 +14,10 @@ const ControlButtons = () => {
         }
         reader.onload = () => {
             dispatch(addImg(String(reader.result)));
+            dispatch(resetFilters());
         }
     }
-    const saveImage = () => {
-        const vertical = rotateX === 0 ? 1 : -1;
-        const horizontal = rotateY === 0 ? 1 : -1;
-
-        const img = new Image();
-        img.src = image;
-
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-
-            ctx.filter = `brightness(${brightness}%) invert(${invert / 2}%)grayscale(${grayscale}%)saturate(${saturate}%) `;
-
-            ctx.translate(canvas.width / 2, canvas.height / 2); 
-
-            rotate && ctx.rotate(rotate * Math.PI / 180);
-
-            ctx.scale(horizontal, vertical);
-
-            ctx.drawImage(img, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
-
-
-            const link = document.createElement('a');
-            const saveNameImage = prompt('Please name the image');
-            if (saveNameImage) {
-                link.download = saveNameImage;
-                link.href = canvas.toDataURL(image);
-                link.click();
-            }
-        }
-    }
+    
     return (
         <div className="controls">
             <button
@@ -70,7 +39,7 @@ const ControlButtons = () => {
                 <button
                     className='save'
                     disabled={!image}
-                    onClick={saveImage}>
+                    onClick={() => dispatch(saveImage())}>
                     Save Image
                 </button>
             </div>

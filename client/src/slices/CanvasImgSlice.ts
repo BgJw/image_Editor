@@ -62,12 +62,45 @@ const CanvasImgSlice = createSlice({
                     state.rotateY -= payload.value;
                 }
             } else if (payload.way === 'horizontal') {
-                if(state.rotateX === 0 ){
+                if (state.rotateX === 0) {
                     state.rotateX += payload.value;
                 } else {
                     state.rotateX -= payload.value;
                 }
             }
+        },
+        saveImage: (state) => {
+            const vertical = !state.rotateX ? 1 : -1;
+            const horizontal = !state.rotateY ? 1 : -1;
+
+            const img = new Image();
+            img.src = state.image;
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+
+            ctx.filter = `brightness(${state.brightness}%) invert(${state.invert / 2}%) grayscale(${state.grayscale}%) saturate(${state.saturate}%) `;
+
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+
+            state.rotate && ctx.rotate(state.rotate * Math.PI / 180);
+
+            ctx.scale(horizontal, vertical);
+            
+            ctx.drawImage(img, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
+
+
+            const link = document.createElement('a');
+            const saveNameImage = prompt('Please name the image');
+            if (saveNameImage) {
+                link.download = saveNameImage;
+                link.href = canvas.toDataURL(state.image);
+                link.click();
+            }
+
+
         }
 
     },
@@ -78,6 +111,7 @@ const CanvasImgSlice = createSlice({
 export const {
     addImg, removeImg,
     setValue, resetFilters,
-    rotate, returnFilters } = CanvasImgSlice.actions;
+    rotate, returnFilters,
+    saveImage } = CanvasImgSlice.actions;
 
 export default CanvasImgSlice.reducer;

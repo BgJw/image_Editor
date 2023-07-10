@@ -37,21 +37,26 @@ const setFilter = () => {
     return (
         <div className="workspace">
 
-            <img
-                style={ STYLE } 
-                src={image? image : 'https://www.uipi.com/wp-content/uploads/2018/07/placeholder.png'} 
-                alt=""  className={ `${transition ? 'allTransition ' : 'resetFilter '} imageRefactoring`}
-                
-                onMouseDown={ () => {
-                    setTransition(false);
-                    setFilter();
-                    dispatch(resetFilters());
-                }}
-                onMouseUp={() => {
-                    dispatch(returnFilters(history as Ifilter)) 
-                    setTimeout(() => {
-                        setTransition(true)}, 400)
-                    }}/>
+            {
+                image ? 
+                <img
+                    style={ STYLE } 
+                    src={ image }
+                    alt=""  className={ `${transition ? 'allTransition ' : 'resetFilter '} imageRefactoring`}
+                    
+                    onMouseDown={ () => {
+                        setTransition(false);
+                        setFilter();
+                        dispatch(resetFilters());
+                    }}
+                    onMouseUp={() => {
+                        dispatch(returnFilters(history as Ifilter)) 
+                        setTimeout(() => {
+                            setTransition(true)}, 400)
+                        }}/>
+                        :
+                <img src='https://www.uipi.com/wp-content/uploads/2018/07/placeholder.png' alt="placeholder" className="imageRefactoring" />
+            }
         </div>
     );
 };

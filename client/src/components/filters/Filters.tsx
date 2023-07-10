@@ -29,14 +29,14 @@ const Filters = () => {
                     onClick={ () => {
                         setActiveFilter('brightness');
                     }}>
-                        Brighness
+                        Brightness
                 </button>
                 <button 
                     className={activeFilter === 'saturate'? 'controlBttn active': 'controlBttn'}
                     onClick={ () => {
                         setActiveFilter('saturate');
                     }}>
-                        Saturation
+                        Saturate
                 </button>
                 <button 
                     className={activeFilter === 'invert'? 'controlBttn active': 'controlBttn'}
@@ -61,7 +61,7 @@ const Filters = () => {
                         disabled={activeFilter === undefined}
                         value={activeValue}
                         onChange={ e => 
-                        dispatch(setValue({name: activeFilter as filterName, value: +e.target.value}))} />
+                            dispatch(setValue({name: activeFilter as filterName, value: +e.target.value}))} />
                 </div>
             </div>
             <div className='filters__rotateFlips'>
