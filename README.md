@@ -11,3 +11,6 @@ pobrania zmodyfikowanego zdjęcia.
 * React
 * Typescript
 * Redux/toolkit
+
+## Link 
+[Image Editor](https://image-editor-bay.vercel.app/)
