@@ -33,16 +33,12 @@ const setFilter = () => {
         rotateY});
 }
     
-    
     return (
         <div className="workspace">
-
-            {
-                image ? 
                 <img
                     style={ STYLE } 
-                    src={ image }
-                    alt=""  className={ `${transition ? 'allTransition ' : 'resetFilter '} imageRefactoring`}
+                    src={ image ? image : 'https://www.uipi.com/wp-content/uploads/2018/07/placeholder.png' }
+                    alt="Uploaded content"  className={ `${transition ? 'allTransition ' : 'resetFilter '} imageRefactoring`}
                     
                     onMouseDown={ () => {
                         setTransition(false);
@@ -53,10 +49,9 @@ const setFilter = () => {
                         dispatch(returnFilters(history as Ifilter)) 
                         setTimeout(() => {
                             setTransition(true)}, 400)
-                        }}/>
-                        :
-                <img src='https://www.uipi.com/wp-content/uploads/2018/07/placeholder.png' alt="placeholder" className="imageRefactoring" />
-            }
+                        }}
+                />
+                    
         </div>
     );
 };

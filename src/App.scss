@@ -42,6 +42,19 @@ button{
     }
 
 }
+@media (max-width: 768px) {
+    .App {
+        min-width: unset;
+        width: 95%;
+        grid-template-areas: 
+            "a"
+            "c"
+            "b"
+            "d";
+        grid-template-columns: 1fr;	
+        grid-template-rows: auto;
+    }
+}
 
 
 @-webkit-keyframes pulse {
@@ -66,8 +79,6 @@ button{
 		        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 	}
 }
-
-
 
 @keyframes pulse {
 	0% {

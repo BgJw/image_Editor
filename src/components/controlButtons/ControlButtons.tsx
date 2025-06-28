@@ -24,13 +24,12 @@ const ControlButtons = () => {
                 disabled={!image}
                 className='reset'
                 onClick={() => dispatch(resetFilters())}>
-                    Reset Filters
+                    Reset
             </button>
             <div className='controls__wrap'>
                 <label htmlFor="img"
-                    className='choose'
-                    style={{ animation: image.length > 0 ? 'none' : 'pulse 2s infinite' }}>
-                    Choose Image
+                    className='choose'>
+                    Choose
                     <input
                         type="file" id='img'
                         accept="image/jpeg, image/jpg, image/psd, image/tga, image/tiff"
@@ -40,7 +39,7 @@ const ControlButtons = () => {
                     className='save'
                     disabled={!image}
                     onClick={() => dispatch(saveImage())}>
-                    Save Image
+                    Save
                 </button>
             </div>
         </div>

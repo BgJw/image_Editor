@@ -67,3 +67,28 @@
         }
     }
 }
+
+@media (max-width: 480px) {
+    .controls {
+        button,
+        label {
+            font-size: 12px;
+            height: 40px;     
+            min-width: 70px;  
+        }
+        .reset {
+            font-size: 12px;
+        }
+
+        &__wrap {
+            grid-template-columns: 1fr 1fr;
+            column-gap: 8px;
+
+            .choose,
+            .save {
+                font-size: 12px;
+                padding: 6px;
+            }
+        }
+    }
+}

@@ -10,8 +10,6 @@
     .imageRefactoring {
         width: 100%;
         height: 100%;
-        -o-object-fit: contain;
-        object-fit: contain;
 
         &.allTransition {
             -webkit-transition: all .2s;
@@ -22,10 +20,31 @@
             -webkit-transition: -webkit-filter .2s;
             transition: -webkit-filter .2s;
             -o-transition: filter .2s;
-
             transition: filter .2s, -webkit-filter .2s;
 
         }
 
+    }
+}
+@media (min-width: 1025px) {
+    .workspace {
+        height: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+.workspace {
+    min-width: unset;
+    height: auto;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .workspace {
+        .imageRefactoring {
+            -o-object-fit: contain;
+            object-fit: contain;
+        }
     }
 }
